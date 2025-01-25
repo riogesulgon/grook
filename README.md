@@ -28,6 +28,10 @@ A high-performance Rust CLI tool for interacting with Groq's API using the Mixtr
    chmod +x scripts/init_groq.sh
    ./scripts/init_groq.sh
    ```
+5. Install the binary
+   ```
+   cargo install --path=.
+   ```
 
 ### Option 2: Install using Cargo
 1. Install Rust from [rustup.rs](https://rustup.rs/) if not already installed
@@ -35,11 +39,12 @@ A high-performance Rust CLI tool for interacting with Groq's API using the Mixtr
    ```bash
    cargo install --git https://github.com/riogesulgon/grook.git
    ```
-3. Set up your Groq API key:
+3. Set up your Groq API key using the setup script:
    ```bash
-   grook --init
+   chmod +x scripts/init_groq.sh
+   ./scripts/init_groq.sh
    ```
-
+   
 ## Usage
 
 Send a message to Groq's API:
