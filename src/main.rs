@@ -1,6 +1,8 @@
 use std::env;
 use reqwest::Client;
-use serde_json::{Value, json}; // Updated import
+use serde_json::Value; // Removed unused json import
+use synoptic::{Highlighter, TokOpt};
+use lliw::Fg;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -56,11 +58,48 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         for choice in choices {
             if let Some(message) = choice["message"].as_object() {
                 if let Some(content) = message["content"].as_str() {
-                    println!("{}", content);
+                    // Use synoptic to highlight markdown
+                    let mut h = synoptic::from_extension("md", 4).unwrap_or_else(|| Highlighter::new(4));
+                    
+                    // Split content into lines
+                    let lines: Vec<String> = content.split('\n').map(|s| s.to_string()).collect();
+                    
+                    // Run the highlighter
+                    h.run(&lines);
+                    
+                    // Render the output
+                    for (line_number, line) in lines.iter().enumerate() {
+                        for token in h.line(line_number, line) {
+                            match token {
+                                TokOpt::Some(text, kind) => print!("{}{text}{}", colour(&kind), Fg::Reset),
+                                TokOpt::None(text) => print!("{text}"),
+                            }
+                        }
+                        println!(); // Newline at end of each line
+                    }
                 }
             }
         }
     }
 
     Ok(())
+}
+
+// Colour function for markdown tokens
+fn colour(name: &str) -> Fg {
+    match name {
+        "heading" => Fg::Blue,
+        "block" => Fg::Yellow,
+        "link" => Fg::Purple,
+        "bold" => Fg::Yellow,
+        "italic" => Fg::LightPurple,
+        "strikethrough" => Fg::LightBlack,
+        "quote" => Fg::LightBlue,
+        "image" => Fg::Red,  // Replaced Magenta with Red
+        "math" => Fg::Cyan,
+        "comment" => Fg::LightBlack,
+        "linebreak" => Fg::LightBlack,
+        "list" => Fg::Red,
+        _ => Fg::Reset,
+    }
 }

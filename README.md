@@ -1,6 +1,14 @@
-# Grook
+# Grook 🚀
 
-A Rust CLI tool for interacting with Groq's API using the Mixtral 8x7b model.
+**Lightning-Fast AI CLI Tool** ⚡
+
+A high-performance Rust CLI tool for interacting with Groq's API using the Mixtral 8x7b model.
+
+✨ **Key Features:**
+- 🏎️ **Blazing Fast**: Combines Rust's performance with Groq's cutting-edge AI acceleration
+- 🧠 **Powerful AI**: Leverages Groq's Mixtral 8x7b model for advanced AI interactions
+- 🌈 **Rich Output**: Beautiful markdown formatting with syntax highlighting
+- ⚡ **Instant Responses**: Optimized for speed and efficiency
 
 ## Installation
 
@@ -86,3 +94,11 @@ cargo clippy
 - reqwest: HTTP client
 - tokio: Async runtime
 - serde/serde_json: JSON serialization
+- synoptic: Syntax highlighting library
+- lliw: Color library for terminal output
+
+## Features
+
+- Markdown-formatted output with syntax highlighting
+- Supports various markdown elements like headings, code blocks, links, bold, italic text, and more
+- Colorful terminal display with different colors for different markdown tokens
