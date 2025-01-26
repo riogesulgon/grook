@@ -10,6 +10,7 @@ A high-performance Rust CLI tool for interacting with Groq's API using the Mixtr
 - 🌈 **Rich Output**: Beautiful markdown formatting with syntax highlighting
 - ⚡ **Instant Responses**: Optimized for speed and efficiency
 
+![demo](grook.gif)
 ## Installation
 
 ### Option 1: Install from source
